@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root90877
+      MYSQL_DATABASE: dorms_db 
+      MYSQL_USER: dorms_admin  
+      MYSQL_PASSWORD: lupra90877
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql-data:/var/lib/mysql"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root90877
+      # Disable SSL verification (Not recommended for production)
+      PMA_SKIP_SSL: true
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "8084:80"
+    depends_on:
+      - db
+    volumes:
+      - ./custom-php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./nginx/conf.d:/etc/nginx/conf.d
+
+volumes:
+  mysql-data:
+  custom-php.ini:
+
+
+
+# Mount custom php.ini (adjusted path)
+#- ./custom-php.ini:/usr/local/etc/php/custom.ini:ro  # Read-only mount
+#- ./custom-php.ini:/usr/local/etc/php/custom.ini:ro  # Read-only mount
+      

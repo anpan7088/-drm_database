@@ -177,18 +177,12 @@ COMMIT;
 ```
 
 ## tables for cities, places and countries
+### this tables are used for searching the places around the world and are only used in this procedures: SearchCitiesByCountry and SearchCitiesByName
 
 ```SQL
 --
--- Database: `dorms_db`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `cities`
 --
-
 CREATE TABLE `cities` (
   `id` mediumint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,

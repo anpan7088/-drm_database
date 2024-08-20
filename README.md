@@ -175,3 +175,229 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ```
+
+## tables for cities, places and countries
+
+```SQL
+--
+-- Database: `dorms_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` mediumint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state_id` mediumint UNSIGNED NOT NULL,
+  `state_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_id` mediumint UNSIGNED NOT NULL,
+  `country_code` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 06:31:01',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(1) NOT NULL DEFAULT '1',
+  `wikiDataId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Rapid API GeoDB Cities'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` mediumint UNSIGNED NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iso3` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numeric_code` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iso2` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phonecode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capital` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency_symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tld` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `native` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `region` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `region_id` mediumint UNSIGNED DEFAULT NULL,
+  `subregion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subregion_id` mediumint UNSIGNED DEFAULT NULL,
+  `nationality` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timezones` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `translations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `emoji` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emojiU` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(1) NOT NULL DEFAULT '1',
+  `wikiDataId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Rapid API GeoDB Cities'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regions`
+--
+
+CREATE TABLE `regions` (
+  `id` mediumint UNSIGNED NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `translations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(1) NOT NULL DEFAULT '1',
+  `wikiDataId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Rapid API GeoDB Cities'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `states`
+--
+
+CREATE TABLE `states` (
+  `id` mediumint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_id` mediumint UNSIGNED NOT NULL,
+  `country_code` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fips_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iso2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(1) NOT NULL DEFAULT '1',
+  `wikiDataId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Rapid API GeoDB Cities'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subregions`
+--
+
+CREATE TABLE `subregions` (
+  `id` mediumint UNSIGNED NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `translations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `region_id` mediumint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(1) NOT NULL DEFAULT '1',
+  `wikiDataId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Rapid API GeoDB Cities'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cities_test_ibfk_1` (`state_id`),
+  ADD KEY `cities_test_ibfk_2` (`country_id`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_continent` (`region_id`),
+  ADD KEY `country_subregion` (`subregion_id`);
+
+--
+-- Indexes for table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `states`
+--
+ALTER TABLE `states`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_region` (`country_id`);
+
+--
+-- Indexes for table `subregions`
+--
+ALTER TABLE `subregions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subregion_continent` (`region_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `states`
+--
+ALTER TABLE `states`
+  MODIFY `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subregions`
+--
+ALTER TABLE `subregions`
+  MODIFY `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cities`
+--
+ALTER TABLE `cities`
+  ADD CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`),
+  ADD CONSTRAINT `cities_ibfk_2` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`);
+
+--
+-- Constraints for table `countries`
+--
+ALTER TABLE `countries`
+  ADD CONSTRAINT `country_continent_final` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`),
+  ADD CONSTRAINT `country_subregion_final` FOREIGN KEY (`subregion_id`) REFERENCES `subregions` (`id`);
+
+--
+-- Constraints for table `states`
+--
+ALTER TABLE `states`
+  ADD CONSTRAINT `country_region_final` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`);
+
+--
+-- Constraints for table `subregions`
+--
+ALTER TABLE `subregions`
+  ADD CONSTRAINT `subregion_continent_final` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`);
+COMMIT;
+
+```

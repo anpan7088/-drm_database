@@ -177,7 +177,11 @@ COMMIT;
 ```
 
 ## tables for cities, places and countries
-### this tables are used for searching the places around the world and are only used in this procedures: SearchCitiesByCountry and SearchCitiesByName
+
+this tables are used for searching the places around the world and are only used in this procedures: 
+
+1. SearchCitiesByCountry
+2. SearchCitiesByName
 
 ```SQL
 --

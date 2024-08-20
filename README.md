@@ -2,35 +2,13 @@
 ## Tabels for dorms and users
 
 ```SQl
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: db
--- Generation Time: Aug 20, 2024 at 09:20 AM
--- Server version: 8.2.0
--- PHP Version: 8.2.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `dorms_db`
 --
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `dorms`
 --
-
 CREATE TABLE `dorms` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -48,7 +26,6 @@ CREATE TABLE `dorms` (
 --
 -- Table structure for table `dorms_images`
 --
-
 CREATE TABLE `dorms_images` (
   `id` int NOT NULL,
   `dorm_id` int NOT NULL,
@@ -62,7 +39,6 @@ CREATE TABLE `dorms_images` (
 --
 -- Table structure for table `dorms_review`
 --
-
 CREATE TABLE `dorms_review` (
   `id` int NOT NULL,
   `dorm_id` int NOT NULL,
@@ -83,7 +59,6 @@ CREATE TABLE `dorms_review` (
 --
 -- Table structure for table `users`
 --
-
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -112,10 +87,6 @@ DELIMITER $$
 CREATE TRIGGER `update_updated_at` BEFORE UPDATE ON `users` FOR EACH ROW SET NEW.updated_at = NOW()
 $$
 DELIMITER ;
-
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `dorms`

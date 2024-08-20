@@ -181,7 +181,42 @@ COMMIT;
 this tables are used for searching the places around the world and are only used in this procedures: 
 
 1. SearchCitiesByCountry
+   
+```SQL
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `SearchCitiesByCountry`(IN `countryName` VARCHAR(64))
+BEGIN
+    SELECT cities.id AS 'id',
+           cities.name AS 'Name',
+           countries.name AS 'country',
+           states.name AS 'state'
+    FROM cities
+    INNER JOIN countries ON cities.country_id = countries.id
+    INNER JOIN states ON cities.state_id = states.id
+    WHERE countries.name COLLATE utf8mb4_unicode_ci  LIKE CONCAT('%', countryName, '%')
+ORDER BY country, Name;
+END$$
+DELIMITER ;
+```
+
 2. SearchCitiesByName
+   
+```SQL
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `SearchCitiesByName`(IN `cityName` VARCHAR(64))
+BEGIN
+    SELECT cities.id AS 'id',
+           cities.name AS 'Name',
+           countries.name AS 'country',
+           states.name AS 'state'
+    FROM cities
+    INNER JOIN countries ON cities.country_id = countries.id
+    INNER JOIN states ON cities.state_id = states.id
+    WHERE cities.name COLLATE utf8mb4_unicode_ci  LIKE CONCAT('%', cityName, '%')
+ORDER BY country, Name;
+END$$
+DELIMITER ;
+```
 
 ```SQL
 --
